@@ -1,0 +1,120 @@
+﻿@using RedBookWebApplication.Model
+@model GetItemsModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Главная</h1>
+
+<p>
+    <a asp-action="Create">Создать запись</a>
+</p>
+<form asp-action="Index" asp-controller="Items" method="post">
+    <p>
+
+        <select name="sortingValue" onchange="this.form.submit()">
+            <option disabled selected>Выберите сортировку</option>
+            <option value="0">По убыванию</option>
+            <option value="1">По возростанию</option>
+        </select>
+    </p>
+</form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Spread
+                </th>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Biology
+                </th>
+                <th>
+                    LimitingFactors
+                </th>
+                <th>
+                    SecurityMeasures
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    ClassItem
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Spread)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Biology)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LimitingFactors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SecurityMeasures)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Image)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassItem.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Посмотреть</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+    <form asp-action="Index" asp-controller="Items" method="post">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+
+            @if (i != Model.CurrentPageIndex)
+            {
+                @*<input type="submit" class="btn btn-outline-primary mt-3"  value="@i" name="currentPageIndex"/>*@
+                <input type="submit" class="btn btn-outline-primary" value="@i" name="pageIndex" />
+            }
+            else
+            {
+                <input type="submit" class="btn btn-outline-primary" style="background-color:cornflowerblue" value="@i" />
+            }
+
+        }
+    </form>
+    <script>
+        /*function Sorting(){*/
+            var val = document.getElementById('value1').onclick = function () {
+                document.getElementById('myform').submit();
+         /*   };*/
+        }
+    </script>

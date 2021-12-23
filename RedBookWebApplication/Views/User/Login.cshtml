@@ -1,0 +1,10 @@
+﻿@using RedBookWebApplication.Model
+@model UserModel
+    <form asp-action="Login" asp-controller="User">
+        <label>Введите Username</label><br />
+        <input asp-for="UserName" /> <br /><br />
+        <label>Введите пароль</label><br />
+        <input  asp-for="Password" /><br /><br />
+        <input type="submit" id="submitLogin" value="Логин" />
+
+    </form>
